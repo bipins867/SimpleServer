@@ -1,0 +1,87 @@
+{
+  "info": {
+    "name": "SimpleServer GraphQL",
+    "description": "Postman Collection for the simple Express + Apollo Server.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Query: Welcome",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "graphql",
+          "graphql": {
+            "query": "query Welcome {\n  welcome\n}",
+            "variables": ""
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/graphql",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "graphql"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Query: Get User",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "graphql",
+          "graphql": {
+            "query": "query GetUser($id: ID!) {\n  getUser(id: $id) {\n    message\n    data {\n      id\n      name\n    }\n  }\n}",
+            "variables": "{\n  \"id\": \"123\"\n}"
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/graphql",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "graphql"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Mutation: Post Data",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "graphql",
+          "graphql": {
+            "query": "mutation PostData($data: JSON) {\n  postData(data: $data) {\n    message\n    receivedData\n  }\n}",
+            "variables": "{\n  \"data\": {\n    \"hello\": \"world\",\n    \"isGraphQL\": true\n  }\n}"
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/graphql",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "graphql"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
