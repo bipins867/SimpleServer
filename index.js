@@ -27,6 +27,14 @@ async function startServer() {
     expressMiddleware(server)
   );
 
+  // Simple REST API endpoint to test .env
+  app.get('/api/test-env', (req, res) => {
+    res.json({
+      message: 'Environment variable test',
+      value: process.env.TEST_ENV_VAR || 'No value found from .env'
+    });
+  });
+
   app.listen(port, () => {
     console.log(`GraphQL Server is running on http://localhost:${port}/graphql`);
   });
