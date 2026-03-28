@@ -19,6 +19,7 @@ const resolvers = {
   JSON: JSONScalar,
   Query: {
     welcome: () => 'Welcome to the simple GraphQL server!',
+    getEnvValue: () => process.env.TEST_ENV_VAR || 'No value found from .env',
     getUser: (_, { id }) => ({
       message: `Fetched detail for user ${id}`,
       data: { id, name: `User ${id}` }

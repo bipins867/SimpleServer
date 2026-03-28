@@ -19,6 +19,7 @@ const typeDefs = `#graphql
   type Query {
     welcome: String!
     getUser(id: ID!): UserResponse!
+    getEnvValue: String!
   }
 
   type Mutation {
