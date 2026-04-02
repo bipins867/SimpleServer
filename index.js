@@ -1,11 +1,11 @@
-require('dotenv').config();
-const express = require('express');
-const cors = require('cors');
-const { ApolloServer } = require('@apollo/server');
-const { expressMiddleware } = require('@as-integrations/express5');
+require("dotenv").config();
+const express = require("express");
+const cors = require("cors");
+const { ApolloServer } = require("@apollo/server");
+const { expressMiddleware } = require("@as-integrations/express5");
 
-const typeDefs = require('./graphql/typeDefs');
-const resolvers = require('./graphql/resolvers');
+const typeDefs = require("./graphql/typeDefs");
+const resolvers = require("./graphql/resolvers");
 
 async function startServer() {
   const app = express();
@@ -20,23 +20,27 @@ async function startServer() {
 
   // Apply middlewares
   // The GraphQL endpoint will be available at /graphql
-  app.use(
-    '/graphql',
-    cors(),
-    express.json(),
-    expressMiddleware(server)
-  );
+  app.use("/graphql", cors(), express.json(), expressMiddleware(server));
+  app.get("/test", (req, res) => {
+    console.log("Testing at time :- ", new Date().toISOString());
+    res.json({
+      message: "Test endpoint",
+      value: "Test value",
+    });
+  });
 
   // Simple REST API endpoint to test .env
-  app.get('/api/test-env', (req, res) => {
+  app.get("/api/test-env", (req, res) => {
     res.json({
-      message: 'Environment variable test',
-      value: process.env.TEST_ENV_VAR || 'No value found from .env'
+      message: "Environment variable test",
+      value: process.env.TEST_ENV_VAR || "No value found from .env",
     });
   });
 
   app.listen(port, () => {
-    console.log(`GraphQL Server is running on http://localhost:${port}/graphql`);
+    console.log(
+      `GraphQL Server is running on http://localhost:${port}/graphql`,
+    );
   });
 }
 
